@@ -38,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
             //        save database
             this.database.daoTodo().InsertTodo(todo);
+//            this.database.daoTodo().InsertTodo();
 
-        System.out.println("data in db: "+this.database.daoTodo().fetchAllTodos().toArray());
+//        System.out.println("data in db: "+this.database.daoTodo().fetchAllTodos().toArray());
 
         // use this setting to improve performance if you know that changes
         this.recyclerView.setHasFixedSize(true);

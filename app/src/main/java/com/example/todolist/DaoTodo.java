@@ -3,6 +3,7 @@ package com.example.todolist;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -12,9 +13,10 @@ import java.util.List;
 public interface DaoTodo {
 
     @Insert
-    long InsertTodo(Todo todo);
+//    long InsertTodo(Todo todo);
+    void InsertTodo(Todo todo);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertTodoList(List<Todo> todoList);
 
     @Query("SELECT * FROM " + Database.TABLE_NAME_TODO)
