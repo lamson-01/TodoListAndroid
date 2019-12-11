@@ -12,8 +12,8 @@ import java.util.List;
 @Dao
 public interface DaoTodo {
 
-    @Insert
 //    long InsertTodo(Todo todo);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void InsertTodo(Todo todo);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

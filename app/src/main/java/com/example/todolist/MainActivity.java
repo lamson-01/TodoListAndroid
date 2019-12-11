@@ -5,9 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Spinner;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         this.recyclerView = findViewById(R.id.recyclerView);
 
 //        build database
-        this.database = Room.databaseBuilder(getApplicationContext(), Database.class, Database.DB_NAME).build();
+        this.database = Room.databaseBuilder(getApplicationContext(), Database.class, Database.DB_NAME).allowMainThreadQueries().build();
 
 //        insert database
         Todo todo = new Todo();
@@ -38,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
             //        save database
             this.database.daoTodo().InsertTodo(todo);
-//            this.database.daoTodo().InsertTodo();
-
-//        System.out.println("data in db: "+this.database.daoTodo().fetchAllTodos().toArray());
 
         // use this setting to improve performance if you know that changes
         this.recyclerView.setHasFixedSize(true);
@@ -48,10 +49,22 @@ public class MainActivity extends AppCompatActivity {
         this.layoutManager = new LinearLayoutManager(this);
         this.recyclerView.setLayoutManager(this.layoutManager);
 
-        String[] mDataset = {"sdfsdf", "dsfsdf", "sdfsdfs"};
+//        fetch data from DB
+        List<Todo> todoList = this.database.daoTodo().fetchAllTodos();
 
-        this.mAdapter = new TodoAdapter(mDataset);
+
+
+        for (int i = 0; i < todoList.size(); i++){
+            System.out.println(""+ i +" - cate: "+todoList.get(i).getCategory());
+        }
+
+        this.mAdapter = new TodoAdapter(todoList);
         this.recyclerView.setAdapter(this.mAdapter);
 
+    }
+
+    public void openAddingTodo(View view){
+        Intent intent = new Intent(this, add_todo.class);
+        startActivity(intent);
     }
 }
