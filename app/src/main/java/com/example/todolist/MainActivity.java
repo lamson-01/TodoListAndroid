@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         this.layoutManager = new LinearLayoutManager(this);
         this.recyclerView.setLayoutManager(this.layoutManager);
 
+
         showTodoOnScreen();
 
 
