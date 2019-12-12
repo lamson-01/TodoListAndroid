@@ -3,6 +3,7 @@ package com.example.todolist;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -15,9 +16,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
 
     //    private String[] mDataset;
     private List<Todo> todoList;
+//     onClickMainpulate onClickMainpulate;
+//
+//    public void setOnClickMainpulate(TodoAdapter.onClickMainpulate onClickMainpulate) {
+//        this.onClickMainpulate = onClickMainpulate;
+//    }
 
     public class ToDoViewHolder extends RecyclerView.ViewHolder {
 
+        public Button delBtn;
         public TextView txtName;
         public TextView txtNo;
         public TextView txtDesc;
@@ -26,7 +33,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
 
         public ToDoViewHolder(View view) {
             super(view);
-
+            delBtn = view.findViewById(R.id.btnDelete);
             txtNo = view.findViewById(R.id.txtNo);
             txtName = view.findViewById(R.id.txtName);
             txtDesc = view.findViewById(R.id.txtDesc);
@@ -51,7 +58,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ToDoViewHolder toDoViewHolder, int position) {
+    public void onBindViewHolder(ToDoViewHolder toDoViewHolder, final int position) {
 //        toDoViewHolder.txtCategory.setText(this.mDataset[position]);
 
         Todo todo = this.todoList.get(position);
@@ -60,10 +67,20 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
         toDoViewHolder.txtNo.setText("#" + String.valueOf(todo.todo_id));
         toDoViewHolder.txtDesc.setText(todo.description);
         toDoViewHolder.txtCategory.setText(todo.category);
+
     }
 
     @Override
     public int getItemCount() {
         return this.todoList.size();
     }
+
+    public void deleteTodo(){
+
+    }
+//    interface onClickMainpulate {
+//        void deleteTodo(int todoId);
+//
+//        void updateTodo(int todoId);
+//    }
 }
